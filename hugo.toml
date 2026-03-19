@@ -21,7 +21,7 @@ buildDrafts = false
   TocOpen = false
 
   [params.homeInfoParams]
-    Title = "你好，朋友 👋"
+    Title = "你好，我的朋友 👋"
     Content = "这里记录我的想法和文章！"
 
   [[params.socialIcons]]
