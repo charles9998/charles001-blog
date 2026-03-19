@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编程学习路线图</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e8e8f0;
+    --text-dim: #8888a0;
+    --accent-1: #ff6b35;
+    --accent-2: #4ecdc4;
+    --accent-3: #a78bfa;
+    --accent-4: #f472b6;
+    --accent-5: #fbbf24;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans SC', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    border-radius: 2px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: var(--surface);
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .principle-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .principle-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-3), var(--accent-2));
+  }
+
+  .principle-box h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--accent-5);
+  }
+
+  .principle-box p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .principle-box strong {
+    color: var(--text);
+  }
+
+  /* Phase styles */
+  .phase {
+    margin-bottom: 48px;
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 36px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .phase:last-child::before {
+    display: none;
+  }
+
+  .phase-dot {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 3px solid;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .phase-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .phase-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .phase-duration {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .phase-desc {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+
+  .module {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .module:hover {
+    border-color: #3a3a50;
+  }
+
+  .module-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .module-header:hover {
+    background: var(--surface-2);
+  }
+
+  .module-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .module-arrow {
+    color: var(--text-dim);
+    transition: transform 0.2s;
+    font-size: 0.8rem;
+  }
+
+  .module-arrow.open {
+    transform: rotate(90deg);
+  }
+
+  .module-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .module-body.open {
+    display: block;
+  }
+
+  .module-section {
+    margin-top: 16px;
+  }
+
+  .module-section-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .module-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .module-section li {
+    font-size: 0.88rem;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .module-section li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  .output-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin: 2px 4px 2px 0;
+    color: var(--text-dim);
+  }
+
+  .milestone {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 16px;
+    border-left: 3px solid;
+  }
+
+  .milestone-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .milestone p {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+
+  /* Phase color themes */
+  .phase-1 .phase-dot { border-color: var(--accent-1); }
+  .phase-1 .phase-tag { background: rgba(255,107,53,0.15); color: var(--accent-1); }
+  .phase-1 .phase-title { color: var(--accent-1); }
+  .phase-1 .milestone { border-left-color: var(--accent-1); }
+  .phase-1 .milestone-label { color: var(--accent-1); }
+
+  .phase-2 .phase-dot { border-color: var(--accent-2); }
+  .phase-2 .phase-tag { background: rgba(78,205,196,0.15); color: var(--accent-2); }
+  .phase-2 .phase-title { color: var(--accent-2); }
+  .phase-2 .milestone { border-left-color: var(--accent-2); }
+  .phase-2 .milestone-label { color: var(--accent-2); }
+
+  .phase-3 .phase-dot { border-color: var(--accent-3); }
+  .phase-3 .phase-tag { background: rgba(167,139,250,0.15); color: var(--accent-3); }
+  .phase-3 .phase-title { color: var(--accent-3); }
+  .phase-3 .milestone { border-left-color: var(--accent-3); }
+  .phase-3 .milestone-label { color: var(--accent-3); }
+
+  .phase-4 .phase-dot { border-color: var(--accent-4); }
+  .phase-4 .phase-tag { background: rgba(244,114,182,0.15); color: var(--accent-4); }
+  .phase-4 .phase-title { color: var(--accent-4); }
+  .phase-4 .milestone { border-left-color: var(--accent-4); }
+  .phase-4 .milestone-label { color: var(--accent-4); }
+
+  .phase-5 .phase-dot { border-color: var(--accent-5); }
+  .phase-5 .phase-tag { background: rgba(251,191,36,0.15); color: var(--accent-5); }
+  .phase-5 .phase-title { color: var(--accent-5); }
+  .phase-5 .milestone { border-left-color: var(--accent-5); }
+  .phase-5 .milestone-label { color: var(--accent-5); }
+
+  .footer-note {
+    margin-top: 48px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .footer-note strong {
+    color: var(--accent-5);
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.6rem; }
+    .phase-title { font-size: 1.1rem; }
+    .container { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>从零到改进 AI 开源模型</h1>
+    <p>基于你当前起点设计的渐进式学习路径</p>
+    <div class="meta-bar">
+      <span class="meta-item">起点：终端 + VS Code + Git 基础</span>
+      <span class="meta-item">总周期：18-24 个月</span>
+      <span class="meta-item">每日投入：2-3 小时</span>
+    </div>
+  </div>
+
+  <div class="principle-box">
+    <h2>核心设计原则</h2>
+    <p>
+      这个计划的底层逻辑是<strong>「用项目驱动学习，而不是学完再做」</strong>。每个阶段都有一个必须交付的项目，所有知识点围绕这个项目展开。你的优势是<strong>商业判断力和分析框架能力</strong>，这决定了你不需要成为一个全栈工程师——你需要成为一个<strong>能看懂代码、能改代码、能指挥 AI 写代码的技术决策者</strong>。
+    </p>
+    <p style="margin-top: 12px;">
+      路径分两条主线：<strong>App 开发线</strong>（阶段 1→2→3）训练你的工程能力，<strong>AI 线</strong>（阶段 2→4→5）训练你的模型理解力。两条线在阶段 2 交汇——Python 是共同的基础。
+    </p>
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="phase phase-1">
+    <div class="phase-dot"></div>
+    <div class="phase-header">
+      <span class="phase-tag">阶段 1</span>
+      <span class="phase-title">编程思维建立</span>
+      <span class="phase-duration">月 1-3</span>
+    </div>
+    <p class="phase-desc">目标不是学语法，而是建立「分解问题 → 用代码表达解决方案」的思维方式。选 Python 作为第一语言，因为它同时通往 App 开发和 AI 两条路。</p>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">1.1 Python 基础 + 编程思维</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>变量、数据类型、条件判断、循环 — 不要死记语法，理解「数据 + 逻辑 = 程序」</li>
+            <li>函数 — 理解封装和复用，这是编程最核心的抽象能力</li>
+            <li>数据结构：列表、字典、集合 — 对应你分析投资时的「表格思维」</li>
+            <li>文件读写 — 能用 Python 处理 CSV、JSON 数据</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习资源</div>
+          <ul>
+            <li>CS50P（哈佛 Python 入门课，免费，YouTube 有全套）— 最推荐</li>
+            <li>《Automate the Boring Stuff with Python》— 免费在线，实用导向</li>
+            <li>每天用 Claude 做 pair programming，写一个小脚本解决实际问题</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">实践项目</div>
+          <ul>
+            <li>写一个自动抓取股票数据并生成分析报告的脚本</li>
+            <li>把你 Obsidian 里的 Markdown 文章批量处理（重命名、提取标签、统计字数）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">1.2 Git 深入 + 命令行进阶</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>Git 分支、合并、冲突解决 — 你已经会 add/commit/push，现在理解分支工作流</li>
+            <li>终端进阶：管道、重定向、环境变量、PATH 配置</li>
+            <li>SSH 基础 — 以后连接服务器、配置部署都要用</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">1.3 Web 基础三件套</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>HTML — 结构层，你已经通过 Hugo 间接接触了，现在直接学</li>
+            <li>CSS — 样式层，学 Flexbox 和 Grid 布局，够用就行</li>
+            <li>JavaScript 基础 — 交互层，变量、函数、DOM 操作、事件监听</li>
+            <li>不需要精通，目标是能看懂前端代码，知道改哪里</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习资源</div>
+          <ul>
+            <li>freeCodeCamp 的 Responsive Web Design 课程（免费）</li>
+            <li>The Odin Project — 项目驱动，质量极高</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-label">阶段交付物</div>
+      <p>一个 Python 脚本工具（自动化处理你的投资数据）+ 一个纯手写的个人简介页面（HTML/CSS/JS）发布到 charles001.com</p>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase phase-2">
+    <div class="phase-dot"></div>
+    <div class="phase-header">
+      <span class="phase-tag">阶段 2</span>
+      <span class="phase-title">全栈应用开发</span>
+      <span class="phase-duration">月 4-8</span>
+    </div>
+    <p class="phase-desc">这个阶段是两条主线的交汇点。你要学会「前端展示 + 后端逻辑 + 数据库存储」这个完整链路，同时开始接触 AI/ML 的数学基础。</p>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">2.1 后端开发：Python FastAPI</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>HTTP 协议 — 请求/响应模型，GET/POST/PUT/DELETE，状态码</li>
+            <li>FastAPI 框架 — 写 RESTful API，比 Flask 更现代，自带类型检查</li>
+            <li>数据库 — PostgreSQL 基础，SQL 查询，ORM（SQLAlchemy）</li>
+            <li>认证 — JWT token，用户登录注册流程</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">为什么选 FastAPI 而不是 Django/Flask</div>
+          <ul>
+            <li>FastAPI 的设计理念更现代，类型提示让代码更清晰</li>
+            <li>自动生成 API 文档，方便调试</li>
+            <li>性能好，异步支持原生，对未来做 AI 服务很有利</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">2.2 前端框架：React</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>React 核心概念 — 组件、Props、State、Hooks</li>
+            <li>路由（React Router）— 多页面应用</li>
+            <li>状态管理 — 先用 Context，复杂了再学 Zustand</li>
+            <li>UI 框架 — Tailwind CSS + shadcn/ui，快速出好看的界面</li>
+            <li>Next.js 入门 — React 的全栈框架，SSR/SSG，部署到 Vercel（你已经熟悉了）</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习资源</div>
+          <ul>
+            <li>React 官方文档（react.dev）— 2023 年重写的新版非常好</li>
+            <li>Next.js Learn 官方教程 — 边做项目边学</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">2.3 数学基础（为 AI 阶段铺路）</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>线性代数 — 向量、矩阵运算、矩阵乘法（Transformer 的核心运算）</li>
+            <li>微积分 — 导数、链式法则、梯度（理解反向传播）</li>
+            <li>概率统计 — 概率分布、贝叶斯思维、信息论基础</li>
+            <li>不需要严格证明，需要直觉理解 + 能用 NumPy 验证</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习资源</div>
+          <ul>
+            <li>3Blue1Brown 的《线性代数本质》和《微积分本质》系列（YouTube，有中文字幕）</li>
+            <li>用 Python + NumPy 手动实现每个概念，比纯看公式有效 10 倍</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-label">阶段交付物</div>
+      <p>一个完整的全栈 Web 应用：投资组合追踪器（React 前端 + FastAPI 后端 + PostgreSQL），部署上线，能用手机访问</p>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase phase-3">
+    <div class="phase-dot"></div>
+    <div class="phase-header">
+      <span class="phase-tag">阶段 3</span>
+      <span class="phase-title">移动端 + 大型应用架构</span>
+      <span class="phase-duration">月 9-13</span>
+    </div>
+    <p class="phase-desc">从 Web 应用扩展到移动端，同时学习大型应用需要的工程实践。这个阶段完成后你就具备独立开发一个上架 App 的能力。</p>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">3.1 React Native / Flutter（二选一）</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">选择建议</div>
+          <ul>
+            <li>React Native — 如果你阶段 2 的 React 学得顺，直接复用知识，学习成本低</li>
+            <li>Flutter — 如果你想要更好的性能和统一的 UI 表现，但需要学 Dart 新语言</li>
+            <li>推荐 React Native + Expo，因为你的 React 基础可以直接迁移</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>移动端导航（Stack、Tab、Drawer）</li>
+            <li>原生功能调用（相机、定位、推送通知）</li>
+            <li>离线存储 + 数据同步</li>
+            <li>App Store / Google Play 上架流程</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">3.2 大型应用工程实践</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>Docker 容器化 — 把应用打包成可移植的环境</li>
+            <li>CI/CD — GitHub Actions 自动测试和部署（你已经有 Vercel 自动部署的基础）</li>
+            <li>云服务 — AWS / Vercel / Railway，学会选择和配置</li>
+            <li>监控和日志 — 应用上线后如何发现和定位问题</li>
+            <li>性能优化 — 缓存策略、CDN、数据库索引、代码拆分</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">3.3 系统设计思维</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>微服务 vs 单体 — 什么规模用什么架构</li>
+            <li>消息队列（Redis/RabbitMQ）— 异步处理，削峰填谷</li>
+            <li>数据库设计 — 关系型 vs NoSQL，读写分离，分表策略</li>
+            <li>API 设计原则 — RESTful、GraphQL、WebSocket 各自适用场景</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习方式</div>
+          <ul>
+            <li>《System Design Interview》Alex Xu — 用案例讲系统设计</li>
+            <li>拆解你日常使用的 App（微信、雪球、Obsidian）的技术架构</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-label">阶段交付物</div>
+      <p>一个上架 App Store 的移动应用（建议方向：投资分析工具或内容管理工具），后端 Docker 化部署，有完整的 CI/CD 流程</p>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase phase-4">
+    <div class="phase-dot"></div>
+    <div class="phase-header">
+      <span class="phase-tag">阶段 4</span>
+      <span class="phase-title">AI / 深度学习核心</span>
+      <span class="phase-duration">月 10-16（与阶段 3 并行）</span>
+    </div>
+    <p class="phase-desc">从阶段 2 的数学基础出发，进入深度学习领域。目标不是从零写模型，而是深入理解 Transformer 架构，为改进开源模型打基础。</p>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">4.1 机器学习基础</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>监督学习 vs 无监督学习 vs 强化学习 — 三大范式的直觉理解</li>
+            <li>损失函数、梯度下降、过拟合/欠拟合 — 训练的本质</li>
+            <li>用 scikit-learn 跑经典模型：线性回归、决策树、随机森林</li>
+            <li>用你的投资数据做实验 — 预测股价走势（体会模型的局限性）</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">学习资源</div>
+          <ul>
+            <li>Andrew Ng 的 Machine Learning Specialization（Coursera）</li>
+            <li>fast.ai Practical Deep Learning — 自顶向下，先跑通再理解</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">4.2 深度学习 + PyTorch</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>神经网络本质 — 层层嵌套的函数组合 + 自动微分</li>
+            <li>PyTorch 框架 — Tensor 操作、自动求导、Dataset/DataLoader、训练循环</li>
+            <li>CNN 基础 — 理解卷积操作即可，不需要深入</li>
+            <li>RNN → LSTM → Attention → Transformer 的演进逻辑</li>
+            <li>GPU 训练 — Google Colab（免费）或 Lambda Labs</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">为什么选 PyTorch 而不是 TensorFlow</div>
+          <ul>
+            <li>PyTorch 是当前 AI 研究和开源社区的事实标准</li>
+            <li>几乎所有最新的开源 LLM 都基于 PyTorch</li>
+            <li>动态图更直觉，调试更方便</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">4.3 Transformer 架构深度拆解</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>Self-Attention 机制 — Q/K/V 矩阵的物理含义，为什么它能捕捉长距离依赖</li>
+            <li>Multi-Head Attention — 为什么多个头比一个头好</li>
+            <li>位置编码 — 为什么 Transformer 需要它</li>
+            <li>Layer Norm、残差连接 — 训练稳定性的关键</li>
+            <li>手动用 PyTorch 从零实现一个 mini-Transformer（Andrej Karpathy 的 nanoGPT）</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">关键资源</div>
+          <ul>
+            <li>Andrej Karpathy — "Let's build GPT from scratch"（YouTube，3 小时）</li>
+            <li>nanoGPT 代码仓库 — 逐行阅读和修改</li>
+            <li>论文 "Attention Is All You Need" — 读原文，对照代码理解</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-label">阶段交付物</div>
+      <p>用 PyTorch 从零实现一个小型 GPT 模型，在你的博客文章数据上训练，能生成类似风格的文本。在 charles001.com 上写一篇深度技术文章拆解 Transformer</p>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase phase-5">
+    <div class="phase-dot"></div>
+    <div class="phase-header">
+      <span class="phase-tag">阶段 5</span>
+      <span class="phase-title">开源 LLM 实战与改进</span>
+      <span class="phase-duration">月 17-24</span>
+    </div>
+    <p class="phase-desc">进入最终目标。你不需要从零预训练一个大模型（那需要数百万美元），你的切入点是在开源模型基础上做微调、优化和应用创新。</p>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">5.1 开源 LLM 生态</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>Hugging Face 生态 — Transformers 库、模型下载、tokenizer、pipeline</li>
+            <li>主流开源模型架构对比 — LLaMA、Mistral、Qwen、DeepSeek 系列</li>
+            <li>模型推理优化 — 量化（GPTQ/AWQ/GGUF）、vLLM、TensorRT-LLM</li>
+            <li>本地部署 — 在你的 Mac mini 上跑开源模型（llama.cpp / Ollama）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">5.2 微调技术</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">核心内容</div>
+          <ul>
+            <li>Full Fine-tuning vs Parameter-Efficient（PEFT）— 成本和效果的权衡</li>
+            <li>LoRA / QLoRA — 当前最实用的微调方法，低成本高效果</li>
+            <li>数据准备 — 高质量训练数据的构造方法（这是你的信息处理能力的用武之地）</li>
+            <li>RLHF / DPO — 对齐技术，让模型输出符合人类偏好</li>
+            <li>评估方法 — 怎么量化地衡量微调效果</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">实践方向</div>
+          <ul>
+            <li>用你的投资研究文章微调一个「投资分析助手」</li>
+            <li>构造高质量的指令数据集（instruction tuning）</li>
+            <li>在 Lambda Labs 或 RunPod 租 GPU 训练</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="module" onclick="toggleModule(this)">
+      <div class="module-header">
+        <span class="module-name">5.3 改进方向与前沿</span>
+        <span class="module-arrow">▸</span>
+      </div>
+      <div class="module-body">
+        <div class="module-section">
+          <div class="module-section-title">你可以贡献的方向</div>
+          <ul>
+            <li>RAG（检索增强生成）— 让模型接入外部知识库，减少幻觉</li>
+            <li>Agent 框架改进 — 让模型能调用工具、搜索、执行代码</li>
+            <li>中文能力优化 — 很多开源模型的中文能力有提升空间</li>
+            <li>垂直领域微调 — 金融/投资领域的专业模型</li>
+            <li>推理优化 — 模型压缩、加速推理、降低部署成本</li>
+          </ul>
+        </div>
+        <div class="module-section">
+          <div class="module-section-title">参与开源社区</div>
+          <ul>
+            <li>从小 PR 开始：修复文档、添加测试、修复小 bug</li>
+            <li>关注 GitHub Issues 中的 "good first issue" 标签</li>
+            <li>在你的博客上记录每次改进的思路和过程 — 这本身就是贡献</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-label">阶段交付物</div>
+      <p>一个公开的微调模型（发布到 Hugging Face）+ 至少一个被合并的开源项目 PR + 一个结合 AI 能力的完整应用产品</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <strong>关于 AI 辅助编程的使用策略：</strong>从第一天起就用 Claude / Cursor 做 pair programming，但遵守一个铁律 — <strong>先自己想 10 分钟，再问 AI</strong>。AI 是加速器不是替代品。让 AI 帮你写代码可以，但你必须能看懂它写的每一行。如果看不懂，就停下来搞懂再继续。你的目标不是「能让 AI 写出一个 App」，而是「自己能判断 AI 写的代码对不对、好不好、怎么改更好」。这和你做投资分析的思维一致 — 判断力比执行力重要。
+  </div>
+
+</div>
+
+<script>
+function toggleModule(el) {
+  const body = el.querySelector('.module-body');
+  const arrow = el.querySelector('.module-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+</script>
+</body>
+</html>
