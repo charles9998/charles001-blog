@@ -1,6 +1,6 @@
 baseURL = "https://charles001.com/"
 languageCode = "zh-cn"
-title = "Charles 的博客"
+title = "Charles001随思随想"
 theme = "PaperMod"
 
 paginate = 10
