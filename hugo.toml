@@ -43,6 +43,11 @@ buildDrafts = false
   url = "/about/"
   weight = 3
 
+[[menu.main]]
+  name = "学习路线"
+  url = "/learning_roadmap.html"
+  weight = 4
+  
 [markup]
   [markup.highlight]
     codeFences = true
